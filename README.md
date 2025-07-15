@@ -34,7 +34,6 @@ DevLink is a full-stack web application designed to connect freelancers with job
      SENDGRID_API_KEY=your_sendgrid_api_key
      TEMPLATE_ID=your_sendgrid_template_id
      OPENAI_API_KEY=your_openai_api_key
-     PORT=4000
      ```
    - For Firebase, update the config in `src/routes/utils/firebase.jsx` with your Firebase project credentials.
 
