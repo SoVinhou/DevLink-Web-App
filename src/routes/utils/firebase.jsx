@@ -17,13 +17,13 @@ import { JobListsEmployment } from "../../JobListsEmployment";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAy33WLVCQRONqLp4O5X-l1Tcck0sTqFHA",
-  authDomain: "devlink-cd494.firebaseapp.com",
-  projectId: "devlink-cd494",
-  storageBucket: "devlink-cd494.appspot.com",
-  messagingSenderId: "357542937311",
-  appId: "1:357542937311:web:f91688ea03909abe55df6a",
-  measurementId: "G-0D4RD0DNGN"
+  apiKey: your-api-key-here,
+  authDomain: your-key-here,
+  projectId: your-key-here,
+  storageBucket: your-key-here,
+  messagingSenderId: your-key-here,
+  appId: your-key-here,
+  measurementId: your-key-here
 };
 
 // Initialize Firebase
