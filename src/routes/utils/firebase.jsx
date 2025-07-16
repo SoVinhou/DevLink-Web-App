@@ -10,6 +10,8 @@ import { JobLists } from "../../JobLists";
 import Jobs from "../../Jobs";
 import { getStorage } from "firebase/storage";
 import { JobListsEmployment } from "../../JobListsEmployment";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { sendEmailVerification } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -17,13 +19,13 @@ import { JobListsEmployment } from "../../JobListsEmployment";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: your-api-key-here,
-  authDomain: your-key-here,
-  projectId: your-key-here,
-  storageBucket: your-key-here,
-  messagingSenderId: your-key-here,
-  appId: your-key-here,
-  measurementId: your-key-here
+  apiKey: "AIzaSyAy33WLVCQRONqLp4O5X-l1Tcck0sTqFHA",
+  authDomain: "devlink-cd494.firebaseapp.com",
+  projectId: "devlink-cd494",
+  storageBucket: "devlink-cd494.appspot.com",
+  messagingSenderId: "357542937311",
+  appId: "1:357542937311:web:f91688ea03909abe55df6a",
+  measurementId: "G-0D4RD0DNGN"
 };
 
 // Initialize Firebase
@@ -143,5 +145,16 @@ export const getUserDocByUsername = async (username) => {
   } catch (error) {
     console.error('Error getting user document:', error);
     throw error;
+  }
+};
+
+export const checkEmailVerification = async (email) => {
+  try {
+    const userRecord = await firebase.auth().getUserByEmail(email);
+    console.log('User record:', userRecord);
+    return userRecord.emailVerified;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 };

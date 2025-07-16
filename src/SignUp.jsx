@@ -6,8 +6,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { createUserDocFromAuth } from './routes/utils/firebase';
 import {useNavigate} from 'react-router-dom';
-
-
+import { sendEmailVerification } from 'firebase/auth';
 
 const SignUp = (props) => {
     const [contact, setContact] = useState({
@@ -41,10 +40,11 @@ const SignUp = (props) => {
                 console.log('Creating user:', contact.email);
                 const userCredential = await firebase.auth().createUserWithEmailAndPassword(contact.email, contact.password);
                 console.log('User created:', (await userCredential).user.email);
+                const verify = await sendEmailVerification(userCredential.user);
                 const userDocRef = await createUserDocFromAuth(userCredential.user, {name: contact.name});
-                navigate('/LogIn');
+
+                navigate('/EmailVerification');
             } catch (error) {
-                setErrorMessage(error.message); 
                 console.error('Error creating user:', error);
             }
         }

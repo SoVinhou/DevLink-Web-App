@@ -37,27 +37,31 @@ const LogIn = (props) => {
 
     const handleLogin = async () => {
         try {
-            console.log('Logging in user:', contact.username);
-            const userCredential = firebase.auth().signInWithEmailAndPassword(contact.username, contact.password);
-            console.log('User signed in:', (await userCredential).user.email);
-            const userDoc = await getUserDocByUsername(contact.username);
-            console.log('User document:', userDoc);
+          setErrorMessage('');
+          console.log('Logging in user:', contact.username);
+          const userCredential = await firebase.auth().signInWithEmailAndPassword(contact.username, contact.password);
+          console.log('User signed in:', userCredential.user.email);
+          const userDoc = await getUserDocByUsername(contact.username);
+          console.log('User document:', userDoc);
+          if (userCredential.user.emailVerified) {
             navigate('/');
-            window.alert(`User logged in: ${userDoc.username}`);
+          } else {
+            setErrorMessage('*** Email not verified, Please verify your email ***');
+          }
         } catch (error) {
-            console.log(error);
-            if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-                setErrorMessage('*** Invalid username or password ***');
-            } else {
-                setErrorMessage('An error occurred while logging in');
-            }
+          console.log(error);
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+            setErrorMessage('*** Invalid username or password ***');
+          } else {
+            setErrorMessage('An error occurred while logging in');
+          }
         }
-    }
+      };
 
     return <div className="header-div">
         <div className="LogInContainer">
             <h1 style={{marginTop: "60px", fontSize: "40px", fontWeight: "Bold"}}>DevLink Log In</h1>
-            <h1 style={{marginTop: "0px", marginBottom:"40px", fontSize: "27px", fontWeight: "lighter"}}>Enter Information</h1>
+            <h1 style={{marginTop: "0px", marginBottom:"30px", fontSize: "27px", fontWeight: "lighter"}}>Enter Information</h1>
             <input
             name = 'username'
             type = 'email'
@@ -75,6 +79,11 @@ const LogIn = (props) => {
             />
 
             <br></br>
+
+            <h1 style={{ marginTop: '-25px', marginBottom: '20px', fontSize: '20px'}}>
+                <span style={{ fontWeight: 'lighter', textDecoration: 'none' }}>Forgot password? </span>
+                <Link to={'/ForgotPassword'} style={{ fontWeight: 'bold', textDecoration: 'underline' }}>Click here</Link>
+            </h1>
 
             <button type='submit' onClick={handleLogin}>Sign In</button>
             

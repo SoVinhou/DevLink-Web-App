@@ -8,6 +8,8 @@ import ListJobsPage from './routes/ListJobsPage';
 import ProfilePage from './routes/ProfilePage';
 import StripeContainer from './payment/StripeContainer';
 import ThankYouPage from './routes/ThankYouPage';
+import EmailVerificationPage from './routes/EmailVerificationPage';
+import ResetPasswordPage from './routes/ResetPasswordPage';
 
 function App() {
     return (
@@ -21,6 +23,8 @@ function App() {
             <Route path='/Profile' element={ <ProfilePage /> } />
             <Route path='/PaymentForm' element={ <StripeContainer /> } />
             <Route path='/PurchaseCompletion' element={ <ThankYouPage /> } />
+            <Route path='/EmailVerification' element={ <EmailVerificationPage /> } />
+            <Route path='/ForgotPassword' element={ <ResetPasswordPage /> } />
         </Routes>
     );
 }
